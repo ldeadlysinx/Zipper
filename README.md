@@ -71,6 +71,6 @@
 
 2. **Hikaricp DB 연결 부족**
    
- - SSE 통신 문제를 구현하는 과정에서  HikariCP (DB Connection pool 을 관리하는 프레임워크) 에 문제 발생
- - SSeEmitter를 생성하는 메서드에서 DB 연결을 없애는 방법 -> JWT 방식때문에 실시간으로 해당 메서드에서 멤버 PK값을 조회 하였지만 다른 메서드로 분리하여 해결
- - Hikari CP 커스텀으로 성능 최적화하기 -> PoolSize = Tn × ( Cm -1 ) + 1 이런 공식이 있지만 최적의 풀 사이즈 찾기 가 힘들다 (직접 여러번 해보기)
+    - SSE 통신 문제를 구현하는 과정에서  HikariCP (DB Connection pool 을 관리하는 프레임워크) 에 문제 발생
+    - SSeEmitter를 생성하는 메서드에서 DB 연결을 없애는 방법 -> JWT 방식때문에 실시간으로 해당 메서드에서 멤버 PK값을 조회 하였지만 다른 메서드로 분리하여 해결
+    - Hikari CP 커스텀으로 성능 최적화하기 -> PoolSize = Tn × ( Cm -1 ) + 1 이런 공식이 있지만 최적의 풀 사이즈 찾기 가 힘들다 (직접 여러번 해보기)
