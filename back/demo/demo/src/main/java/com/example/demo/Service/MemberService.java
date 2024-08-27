@@ -152,4 +152,10 @@ public class MemberService {
 
         return ResponseEntity.ok("아직 유효한 토큰");
     }
+
+    public Member getMember(CustomUserDetails customUserDetails){
+        Member member = memberRepository.findByUsername(customUserDetails.getUsername());
+
+        return member;
+    }
 }

@@ -36,15 +36,15 @@ public class NotificationService {
     private final Board1Repository board1Repository;
 
 
-    public SseEmitter createEmitter(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        Member member = memberRepository.findByUsername(customUserDetails.getUsername());
+    public SseEmitter createEmitter(long id) {
+
 
         SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
-        userEmitters.put(member.getId(), emitter);
+        userEmitters.put(id, emitter);
 
-        emitter.onCompletion(() -> userEmitters.remove(member.getId()));
-        emitter.onTimeout(() -> userEmitters.remove(member.getId()));
-        emitter.onError(e -> userEmitters.remove(member.getId()));
+        emitter.onCompletion(() -> userEmitters.remove(id));
+        emitter.onTimeout(() -> userEmitters.remove(id));
+        emitter.onError(e -> userEmitters.remove(id));
 
         sendInitialData(emitter);
 

@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
+    @Query("SELECT n FROM Notification n JOIN FETCH n.member WHERE n.member = :member ORDER BY a.createdDate DESC")
     List<Notification> findByMember(Member member);
 }

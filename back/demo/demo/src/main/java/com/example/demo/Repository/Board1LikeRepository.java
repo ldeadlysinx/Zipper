@@ -17,6 +17,6 @@ public interface Board1LikeRepository extends JpaRepository<Board1Like, Long> {
 
     Board1Like findByMemberIdAndBoard1Id(Long memberId, Long boardId);
 
-    @Query("SELECT b.board1 FROM Board1Like b WHERE b.member.id = :memberId")
+    @Query("SELECT b.board1 FROM Board1Like b JOIN FETCH b.board1 WHERE b.member.id = :memberId")
     List<Board1> findLikedBoardsByMember(Long memberId);
 }

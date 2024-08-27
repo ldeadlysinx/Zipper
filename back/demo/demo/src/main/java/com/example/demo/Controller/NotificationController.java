@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import com.example.demo.entity.Member;
 
 import java.util.List;
 
@@ -16,12 +17,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NotificationController {
     private final NotificationService notificationService;
+    private final MemberService memberService;
+
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(path = "/api/v1/notifications/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter streamNotifications(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         System.out.println(customUserDetails.getUsername());
-        return notificationService.createEmitter(customUserDetails);
+
+        Member member = memberService.getMember(customUserDetails);
+
+        Long memberId = member.getId();
+
+        return notificationService.createEmitter(memberId);
     }
 
     @PostMapping("/api/v1/notifications/{id}/read")

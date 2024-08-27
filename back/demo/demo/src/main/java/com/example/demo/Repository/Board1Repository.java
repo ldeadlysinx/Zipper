@@ -36,8 +36,9 @@ public interface Board1Repository extends JpaRepository<Board1,Long> {
     // 좋아요 개수가 3개 이상인 게시물들을 날짜 순으로 정렬하여 페이징 처리
     @Query("SELECT b FROM Board1 b LEFT JOIN b.boardlike bl GROUP BY b HAVING COUNT(bl) >= 3 ORDER BY b.createdDate DESC")
     Page<Board1> findByBoardlikeCountGreaterThanEqualThreeOrderByCreatedDateDesc(Pageable pageable);
-
-    @Query("SELECT b FROM Board1 b LEFT JOIN b.boardlike bl GROUP BY b HAVING COUNT(bl) >= 3")
+    
+    
+    @Query("SELECT b FROM Board1 b LEFT JOIN FETCH b.board1like bl GROUP BY b HAVING COUNT(bl) >= 3")
     List<Board1> findPopularBoards();
 
 //    @Query("SELECT b FROM Board1 b LEFT JOIN b.boardlike bl WHERE b.created_date = CURRENT_DATE GROUP BY b ORDER BY COUNT(bl) DESC")
